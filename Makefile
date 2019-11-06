@@ -25,17 +25,17 @@ png: $(PNG_1024_FILES) $(PNG_512_FILES) $(PNG_256_FILES)
 
 build/png/1024/%.png: build/svg/%.svg
 	mkdir -p $(@D)
-	phantomjs rasterize.js $^ $@ 1024px*1024px 4
+	inkscape -z -w 1024 -h 1024 -e $@ $^
 	optipng $@
 
 build/png/512/%.png: build/svg/%.svg
 	mkdir -p $(@D)
-	phantomjs rasterize.js $^ $@ 512px*512px 2
+	inkscape -z -w 512 -h 512 -e $@ $^
 	optipng $@
 
 build/png/256/%.png: build/svg/%.svg
 	mkdir -p $(@D)
-	phantomjs rasterize.js $^ $@ 256px*256px 1
+	inkscape -z -w 256 -h 256 -e $@ $^
 	optipng $@
 
 clean:
