@@ -208,3 +208,29 @@
 	<path d="M25 180 l30 0 l-15 -25 l-15 25 Z" stroke-width="3" stroke="{{color}}" fill="none" />
 	<path d="M25 154 l80 0" stroke-width="5" stroke="{{color}}" fill="none" />
 {% endmacro %}
+
+{% macro massnahme_betreuung(color='#FFFFFF', text=None) %}
+<path d="M10,192 L128,66 L246,192" stroke="{{color}}" stroke-width="5" fill="none" clip-path="url(#symbol-inner)" />
+{% if text %}
+<text style="font-family: 'Roboto Slab'; font-weight: bold; text-anchor: middle; font-size: 200%; dominant-baseline: bottom;" fill="{{color}}" x="128" y="180">{{text}}</text>
+{% endif %}
+{% endmacro %}
+
+{% macro massnahme_sandienst(color='#FFFFFF') %}
+<path d="M128,64 l0,128 M10,128 l236,0" stroke="{{color}}" stroke-width="5" fill="none" clip-path="url(#symbol-inner)" />
+{% endmacro %}
+
+{% macro massnahme_ts(color='#FFFFFF') %}
+<path d="M44,148 a20,20 0 0,0 0,-40 M64,128 L192,128 m20,20 a20,20 0 0,1 0,-40" fill="none" stroke="{{color}}" stroke-width="5" />
+<text style="font-family: 'Roboto Slab'; font-weight: bold; text-anchor: middle; font-size: 200%; dominant-baseline: bottom;" fill="{{color}}" x="128" y="120">TS</text>
+{% endmacro %}
+
+{% macro massnahme_transport(color='#FFFFFF') %}
+	<ellipse cx="128" cy="128" rx="32" ry="32" fill="none" stroke-width="5" stroke="{{color}}" />
+	<path d="M128,128 l32,0 l-64,0 m32,0 l0,32 l0,-64" fill="none" stroke-width="5" stroke="{{color}}" transform="rotate(45,128,128)" />
+{% endmacro %}
+
+{% macro massnahme_verpflegung(color='#FFFFFF') %}
+{{massnahme_betreuung(color)}}
+<path d="M128,140 l32,-16 a32 32 0 1 0 0,32 Z" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
