@@ -19,18 +19,18 @@
 {% endmacro %}
 
 {% macro verband_1() %}
-<line x1="128" y1="59" x2="128" y2="32" stroke="#000000" stroke-width="5" />
+<line x1="128" y1="64" x2="128" y2="28" stroke="#000000" stroke-width="10" />
 {% endmacro %}
 
 {% macro verband_2() %}
-	<line x1="124" y1="59" x2="124" y2="32" stroke="#000000" stroke-width="5" />
-	<line x1="132" y1="59" x2="132" y2="32" stroke="#000000" stroke-width="5" />
+	<line x1="120" y1="64" x2="120" y2="28" stroke="#000000" stroke-width="10" />
+	<line x1="136" y1="64" x2="136" y2="28" stroke="#000000" stroke-width="10" />
 {% endmacro %}
 
 {% macro verband_3() %}
-	<line x1="120" y1="59" x2="120" y2="32" stroke="#000000" stroke-width="5" />
-	<line x1="128" y1="59" x2="128" y2="32" stroke="#000000" stroke-width="5" />
-	<line x1="136" y1="59" x2="136" y2="32" stroke="#000000" stroke-width="5" />
+	<line x1="112" y1="64" x2="112" y2="28" stroke="#000000" stroke-width="10" />
+	<line x1="128" y1="64" x2="128" y2="28" stroke="#000000" stroke-width="10" />
+	<line x1="144" y1="64" x2="144" y2="28" stroke="#000000" stroke-width="10" />
 {% endmacro %}
 
 {% macro text(text, size="300%", color="#FFFFFF", baseline='central') %}
@@ -233,4 +233,13 @@
 {% macro massnahme_verpflegung(color='#FFFFFF') %}
 {{massnahme_betreuung(color)}}
 <path d="M128,140 l32,-16 a32 32 0 1 0 0,32 Z" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_wasserrettung(color='#FFFFFF', text=None) %}
+<path d="M128 140 l16 16 l-16 16 l-16 -16 l16 -16 Z" stroke-width="2" stroke="{{color}}" fill="none" />
+<path d="M53 123 c25 -30 40 -30 50 -20 c25 25 25 25 50 0 c10 -10 25 -10 50 20" stroke-width="2" stroke="{{color}}" fill="none" />
+<path d="M53 133 c25 -30 40 -30 50 -20 c25 25 25 25 50 0 c10 -10 25 -10 50 20" stroke-width="2" stroke="{{color}}" fill="none" />
+{% if text %}
+{{typ_text(text, '120%', color)}}
+{% endif %}
 {% endmacro %}
