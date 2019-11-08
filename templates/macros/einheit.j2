@@ -1,0 +1,210 @@
+{% macro trupp() %}
+<ellipse cx="128" cy="48" rx="10" ry="10" fill="#000000" />
+{% endmacro %}
+
+{% macro staffel() %}
+<ellipse cx="128" cy="48" rx="10" ry="10" fill="#000000" />
+<ellipse cx="128" cy="24" rx="10" ry="10" fill="#000000" />
+{% endmacro %}
+
+{% macro gruppe() %}
+<ellipse cx="64"  cy="48" rx="10" ry="10" fill="#000000" />
+<ellipse cx="192" cy="48" rx="10" ry="10" fill="#000000" />
+{% endmacro %}
+
+{% macro zug() %}
+<ellipse cx="64"  cy="48" rx="10" ry="10" fill="#000000" />
+<ellipse cx="128" cy="48" rx="10" ry="10" fill="#000000" />
+<ellipse cx="192" cy="48" rx="10" ry="10" fill="#000000" />
+{% endmacro %}
+
+{% macro verband_1() %}
+<line x1="128" y1="59" x2="128" y2="32" stroke="#000000" stroke-width="5" />
+{% endmacro %}
+
+{% macro verband_2() %}
+	<line x1="124" y1="59" x2="124" y2="32" stroke="#000000" stroke-width="5" />
+	<line x1="132" y1="59" x2="132" y2="32" stroke="#000000" stroke-width="5" />
+{% endmacro %}
+
+{% macro verband_3() %}
+	<line x1="120" y1="59" x2="120" y2="32" stroke="#000000" stroke-width="5" />
+	<line x1="128" y1="59" x2="128" y2="32" stroke="#000000" stroke-width="5" />
+	<line x1="136" y1="59" x2="136" y2="32" stroke="#000000" stroke-width="5" />
+{% endmacro %}
+
+{% macro text(text, size="300%", color="#FFFFFF", baseline='central') %}
+<text x="128" y="128" style="font-family: 'Roboto Slab'; font-weight: bold; {% if baseline %}dominant-baseline: {{baseline}};{% endif %} text-anchor: middle; font-size: {{size}};" fill="{{color}}">{{text}}</text>
+{% endmacro %}
+
+{% macro org_text(text, size="100%", color="#FFFFFF", y='180') %}
+<text x="236" y="{{y}}" style="font-family: 'Roboto Slab'; font-weight: bold; text-anchor: end; font-size: {{size}};" fill="{{color}}">{{text}}</text>
+{% endmacro %}
+
+{% macro art_text(text, size="100%", color="#FFFFFF", y='180') %}
+<text x="20" y="{{y}}" style="font-family: 'Roboto Slab'; font-weight: bold; text-anchor: start; font-size: {{size}};" fill="{{color}}">{{text}}</text>
+{% endmacro %}
+
+{% macro typ_text(text, size="200%", color="#FFFFFF", y='70') %}
+<text x="22" y="{{y}}" style="font-family: 'Roboto Slab'; font-weight: bold; font-size: {{size}}; dominant-baseline: text-before-edge;" fill="{{color}}">{{text}}</text>
+{% endmacro %}
+
+{% macro symbol(fill,stroke,width,clip=True) %}
+<rect x="10" y="64" width="236" height="128" stroke-width="{{width}}" stroke="{{stroke}}" fill="{{fill}}" {%if clip %}clip-path="url(#symbol)"{% endif %} />
+{% endmacro %}
+
+{% macro outline(fill='none', stroke='#000000')%}
+<rect x="10" y="64" width="236" height="128" stroke-width="1" stroke="{{stroke}}" fill="{{fill}}" />
+{% endmacro %}
+
+{% macro sonderfunktion(funktion, color='#FFFFFF', width=0) %}
+{% if funktion == 'führung' %}
+<rect x="11" y="65" width="234" height="25" fill="{{color}}" clip-path="url(#symbol)" {% if width %}stroke="{{color}}" stroke-width="{{width}}"{% endif %} />
+{% elif funktion == 'logistik' %}
+<rect x="11" y="166" width="234" height="25" fill="{{color}}" clip-path="url(#symbol)" {% if width %}stroke="{{color}}" stroke-width="{{width}}"{% endif %}  />
+{% endif %}
+{% endmacro %}
+
+{% macro thw(funktion="normal") %}
+{{symbol('#003399', '#FFFFFF', '10')}}
+{{sonderfunktion(funktion)}}
+{{outline()}}
+{% if funktion == 'logistik' %}
+{{org_text('THW', y='160')}}
+{% else %}
+{{org_text('THW')}}
+{% endif %}
+{% endmacro %}
+
+{% macro bundeswehr(funktion="normal") %}
+{{symbol('#996633', '#FFFFFF', '10')}}
+{{sonderfunktion(funktion)}}
+{{outline()}}
+{% if funktion == 'logistik' %}
+{{org_text('BW', y='160')}}
+{% else %}
+{{org_text('BW')}}
+{% endif %}
+{% endmacro %}
+
+{% macro pol(funktion="normal", org="POL") %}
+{{symbol('#13A538', '#000000', '10')}}
+{{sonderfunktion(funktion, '#000000')}}
+{% if funktion == 'logistik' %}
+{{org_text(org, color='#000000', y='160')}}
+{% else %}
+{{org_text(org, color='#000000')}}
+{% endif %}
+{% endmacro %}
+
+{% macro leitung() %}
+{{symbol('#FFFF00', '#000000', '5', clip=False)}}
+{% endmacro %}
+
+{% macro einheit(funktion="normal") %}
+{{symbol('#FFFFFF', '#000000', '10')}}
+{{sonderfunktion(funktion, "#000000")}}
+{{outline()}}
+{% endmacro %}
+
+{% macro feuerwehr(funktion="normal") %}
+{{symbol('#FF0000', '#FFFFFF', '10')}}
+{{sonderfunktion(funktion)}}
+{{outline()}}
+{% endmacro %}
+
+{% macro kats(funktion="normal") %}
+{{symbol('#DF6711', '#000000', '10')}}
+{{sonderfunktion(funktion, '#000000')}}
+{% endmacro %}
+
+{% macro zugtrupp(color="#FFFFFF") %}
+	<ellipse cx="64"  cy="86" rx="10" ry="10" fill="{{color}}" />
+	<ellipse cx="128" cy="86" rx="10" ry="10" fill="{{color}}" />
+	<ellipse cx="192" cy="86" rx="10" ry="10" fill="{{color}}" />
+{% endmacro %}
+
+{% macro massnahme_weitverkehr_mask() %}
+	<mask id="wv_ends">
+		<rect width="100%" height="100%" fill="#FFFFFF" />
+		<path d="M50 160 a16 16 0 0 0 0 -32" stroke="#000000" />
+		<path d="M206 160 a16 16 0 0 1 0 -32" stroke="#000000" />
+	</mask>
+{% endmacro %}
+
+{% macro massnahme_weitverkehr(color='#FFFFFF') %}
+<text style="font-family: 'Roboto Slab'; font-weight: bold; text-anchor: middle; font-size: 300%; dominant-baseline: central;" fill="#FFFFFF" x="128" y="100">WV</text>
+<path d="M50 160 a16 16 0 0 0 0 -32 M206 160 a16 16 0 0 1 0 -32" stroke="{{color}}" stroke-width="5" fill="none" />
+<path d="M56 132 l24 24 l24 -24 l24 24 l24 -24 l24 24 l24 -24" stroke="{{color}}" stroke-width="5" fill="none" mask="url(#wv_ends)" />
+{% endmacro %}
+
+{% macro massnahme_erkundung(color='#FFFFFF') %}
+<path d="M10,192 l236,-128" stroke-width="5" stroke="{{color}}" fill="none" clip-path="url(#symbol-inner)" />
+{% endmacro %}
+
+{% macro massnahme_abc(color='#FFFFFF') %}
+<path d="M88 92 L188 164 M168 92 L68 164" stroke="{{color}}" stroke-width="10" fill="none" />
+<ellipse cx="78" cy="102" rx="20" ry="20" fill="{{color}}" />
+<ellipse cx="178" cy="102" rx="20" ry="20" fill="{{color}}" />
+{% endmacro %}
+
+{% macro massnahme_dekon(color='#FFFFFF') %}
+{{massnahme_abc(color)}}
+<path d="M185,161 m7,7 l-15,0 m15,0 l0,-15 l-15,15 Z" fill="{{color}}" transform="rotate(-10,188,164)" />
+<path d="M71,161 m-7,7 l15,0 l-15,-15 Z" fill="{{color}}" transform="rotate(10,68,164)" />
+{% endmacro %}
+
+{% macro massnahme_dekon_g(color='#FFFFFF') %}
+{{massnahme_dekon(color)}}
+<text style="font-family: 'Roboto Slab'; font-weight: bold; font-size: 200%; text-anchor: middle;" fill="{{color}}" x="128" y="182">G</text>
+{% endmacro %}
+
+{% macro massnahme_dekon_p(color='#FFFFFF') %}
+{{massnahme_dekon(color)}}
+<text style="font-family: 'Roboto Slab'; font-weight: bold; font-size: 200%; text-anchor: middle;" fill="{{color}}" x="128" y="182">P</text>
+{% endmacro %}
+
+{% macro massnahme_iuk(color='#FFFFFF') %}
+<path d="M10 64 l118 96 l0 -64 l118 96" stroke="{{color}}" stroke-width="5" fill="none" clip-path="url(#symbol-inner)" />
+{% endmacro %}
+
+{% macro massnahme_fernsprech_bau_betrieb(color='#FFFFFF') %}
+{{massnahme_iuk(color)}}
+<path d="M20 160 l90 0" stroke="{{color}}" stroke-width="7" fill="none" />
+<path d="M210 140 l0 -48 m-10 -10 a10 10 0 1 0 20 0" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_loeschen(color='#FFFFFF') %}
+<path d="M11 128 L245 128 M156 128 L241 69 M156 128 L241 187" stroke="{{color}}" stroke-width="10" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_sprechfunkbetrieb(color='#FFFFFF') %}
+{{massnahme_iuk(color)}}
+<path d="M155 80 l72 0" stroke="{{color}}" stroke-width="5" fill="none" />
+<path d="M155 88 l12 12 l12 -12 l12 12 l12 -12 l12 12 l12 -12" stroke="{{color}}" stroke-width="3" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_materialerhaltung(color='#FFFFFF') %}
+<path d="M44,138 a20,20 0 0,0 0,-40 M64,118 L192,118 m20,20 a20,20 0 0,1 0,-40" fill="none" stroke="{{color}}" stroke-width="5" />
+{% endmacro %}
+
+{% macro massnahme_verbrauchsgueter(color='#FFFFFF') %}
+<path d="M124 145 l0 -40 L110 85 l36 0 l-14 20 l0 40" fill="none" stroke="{{color}}" stroke-width="3" />
+{% endmacro %}
+
+{% macro massnahme_veterinaer(color='#FFFFFF') %}
+<path d="M59 80 l25 0 L128 176 L172 80 l25 0" stroke-width="5" stroke="{{color}}" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_tier_dekon(color='#FFFFFF') %}
+{{massnahme_veterinaer(color)}}
+<g transform="matrix(0.45,0,0,0.55,0,85)">
+{{massnahme_dekon(color)}}
+</g>
+{% endmacro %}
+
+{% macro massnahme_schlachten(color='#FFFFFF') %}
+{{massnahme_veterinaer(color)}}
+	<path d="M25 180 l30 0 l-15 -25 l-15 25 Z" stroke-width="3" stroke="{{color}}" fill="none" />
+	<path d="M25 154 l80 0" stroke-width="5" stroke="{{color}}" fill="none" />
+{% endmacro %}
