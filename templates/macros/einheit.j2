@@ -174,8 +174,8 @@
 <path d="M210 140 l0 -48 m-10 -10 a10 10 0 1 0 20 0" stroke="{{color}}" stroke-width="5" fill="none" />
 {% endmacro %}
 
-{% macro massnahme_loeschen(color='#FFFFFF') %}
-<path d="M11 128 L245 128 M156 128 L241 69 M156 128 L241 187" stroke="{{color}}" stroke-width="10" fill="none" />
+{% macro massnahme_loeschen(color='#FFFFFF', width='10') %}
+<path d="M11 128 L245 128 M156 128 L241 69 M156 128 L241 187" stroke="{{color}}" stroke-width="{{width}}" fill="none" clip-path="url(#symbol-inner)" />
 {% endmacro %}
 
 {% macro massnahme_sprechfunkbetrieb(color='#FFFFFF') %}
