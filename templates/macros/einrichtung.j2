@@ -1,0 +1,73 @@
+{% macro platz_symbol(fill,stroke,width) %}
+<ellipse cx="128" cy="128" rx="64" ry="64" stroke-width="{{width}}" stroke="{{stroke}}" fill="{{fill}}" />
+{% endmacro %}
+
+{% macro platz_text(text, size="300%", color="#000000", baseline='central', y='136') %}
+<text x="128" y="{{y}}" style="font-family: 'Roboto Slab'; font-weight: bold; {% if baseline %}dominant-baseline: {{baseline}};{% endif %} text-anchor: middle; font-size: {{size}};" fill="{{color}}">{{text}}</text>
+{% endmacro %}
+
+{% macro massnahme_behandlung(color='#000000') %}
+<path d="M128,64 l0,128 M64,128 l128,0" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_bereitstellung(color='#000000') %}
+<path d="M85,105 L85,151 L171,151 L171,105 Q128,128 85,105 Z" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_meldekopf_klein(color='#000000') %}
+<text style="font-family: 'Roboto Slab'; font-weight: bold; font-size: 250%; dominant-baseline: central; text-anchor: middle;" fill="{{color}}" x="128" y="90">M</text>
+{% endmacro %}
+
+{% macro massnahme_fuest_klein(color='#000000') %}
+<rect x="111" y="80" width="34" height="18" fill="none" stroke="{{color}}" stroke-width="2" />
+<line x1="111" y1="98" x2="111" y2="108" stroke="{{color}}" stroke-width="2" />
+{% endmacro %}
+
+{% macro massnahme_betreuung(color='#000000') %}
+<path d="M128,64 l64,128 M128,64 l-64,128" stroke="{{color}}" stroke-width="5" fill="none" clip-path="url(#base)" />
+{% endmacro %}
+
+{% macro massnahme_transport(color='#000000') %}
+<ellipse cx="128" cy="128" rx="32" ry="32" fill="none" stroke-width="5" stroke="{{color}}" />
+<path d="M128,128 l32,0 l-64,0 m32,0 l0,32 l0,-64" fill="none" stroke-width="5" stroke="{{color}}" transform="rotate(45,128,128)" />
+{% endmacro %}
+
+{% macro massnahme_sammeln(color='#000000') %}
+<ellipse fill="#FFFFFF" stroke="{{color}}" stroke-width="3" cx="170" cy="128" rx="10" ry="10" />
+<path d="M76,128 l78,0 m-15,-15 l15,15 l-15,15" stroke="{{color}}" stroke-width="3" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_materialerhaltung(color='#000000') %}
+<path d="M75 140 a16 16 0 0 0 0 -32 m16 16 l74 0 M181 140 a16 16 0 0 1 0 -32" stroke="{{color}}" stroke-width="4" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_verbrauchsgueter(color='#000000') %}
+<path d="M124 145 l0 -40 L110 85 l36 0 l-14 20 l0 40" stroke="{{color}}" stroke-width="3" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_verpflegung(color='#000000') %}
+<path d="M128,120 l20,-10 a20 20 0 1 0 0,20 Z" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_hubschrauberlandeplatz(color='#000000') %}
+<path d="M110,162 l36,0 M128,162 l0,-54" stroke="{{color}}" stroke-width="5" fill="none" />
+<path d="M128,108 a5,5 90 0 1 5,-5 l32,0 a5,5 180 0 1 0,10 l-32,0 a5,5 90 0 1 -5,-5 Z" stroke="{{color}}" stroke-width="5" fill="none" />
+<path d="M128,108 a5,5 90 0 0 -5,-5 l-32,0 a5,5 180 0 0 0,10 l32,0 a5,5 90 0 0 5,-5 Z" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro platz() %}
+{{platz_symbol('#FFFFFF', '#000000', '5')}}
+{% endmacro %}
+
+{% macro fuehrung_platz(funktion='normal') %}}
+{{platz_symbol('#FFFF00', '#000000', '5')}}
+{% if funktion == 'führung' %}
+<rect id="top" x="64" y="64" width="128" height="32" clip-path="url(#base)" />
+{% elif funktion == 'logistik'%}
+<rect x="64" y="160" width="128" height="32" clip-path="url(#base)" />
+{% endif %}
+{% endmacro %}
+
+{% macro stelle(color='#000000') %}
+<path d="M10 80 L128 48 L246 80" stroke-width="5" stroke="{{color}}" fill="none" />
+{% endmacro%}
