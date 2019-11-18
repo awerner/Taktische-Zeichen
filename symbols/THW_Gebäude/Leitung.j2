@@ -1,7 +1,6 @@
 {% extends 'templates/einrichtung.j2' %}
-{%- import 'templates/macros/einrichtung.j2' as einrichtung -%}
 {%- import 'templates/macros/einheit.j2' as einheit -%}
 {% block svg %}
-	{{einrichtung.feuerwehr()}}
-	{{einheit.text('Fw')}}
+	{{einheit.thw()}}
+	{{einheit.text('Tltg')}}
 {% endblock %}

@@ -1,10 +1,33 @@
+{% from 'templates/macros/einheit.j2' import org_text %}
+
 {% macro platz_symbol(fill,stroke,width) %}
 <ellipse cx="128" cy="128" rx="64" ry="64" stroke-width="{{width}}" stroke="{{stroke}}" fill="{{fill}}" />
+{% endmacro %}
+
+{% macro haus_symbol(fill,stroke,width) %}
+<rect x="10" y="64" width="236" height="128" fill="{{fill}}" stroke="{{stroke}}" stroke-width="{{width}}" clip-path="url(#symbol)" />
+<path d="M10 64 L128 16 L246 64" stroke="{{stroke}}" stroke-width="{{width}}" fill="{{fill}}" clip-path="url(#symbol)" />
+{% endmacro %}
+
+{% macro haus_outline() %}
+<path d="M10 64 L10 192 L246 192 L246 64 L128 16 L10 64" stroke="#000000" stroke-width="1" fill="none" />
 {% endmacro %}
 
 {% macro platz_text(text, size="300%", color="#000000", baseline='central', y='136') %}
 <text x="128" y="{{y}}" style="font-family: 'Roboto Slab'; font-weight: bold; {% if baseline %}dominant-baseline: {{baseline}};{% endif %} text-anchor: middle; font-size: {{size}};" fill="{{color}}">{{text}}</text>
 {% endmacro %}
+
+{% macro feuerwehr() %}
+{{haus_symbol('#FF0000', '#FFFFFF', '10') }}
+{{haus_outline() }}
+{% endmacro %}
+
+{% macro thw() %}
+{{haus_symbol('#003399', '#FFFFFF', '10') }}
+{{haus_outline() }}
+{{org_text('THW')}}
+{% endmacro %}
+
 
 {% macro massnahme_behandlung(color='#000000') %}
 <path d="M128,64 l0,128 M64,128 l128,0" stroke="{{color}}" stroke-width="5" fill="none" />
@@ -53,6 +76,30 @@
 <path d="M110,162 l36,0 M128,162 l0,-54" stroke="{{color}}" stroke-width="5" fill="none" />
 <path d="M128,108 a5,5 90 0 1 5,-5 l32,0 a5,5 180 0 1 0,10 l-32,0 a5,5 90 0 1 -5,-5 Z" stroke="{{color}}" stroke-width="5" fill="none" />
 <path d="M128,108 a5,5 90 0 0 -5,-5 l-32,0 a5,5 180 0 0 0,10 l32,0 a5,5 90 0 0 5,-5 Z" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_krankenhaus(color='#000000') %}
+<path d="M10 65 L246,65 M128,64 l0,128 M10,128 l236,0 M69,108 l0,40 M187,108 l0,40" stroke="{{color}}" stroke-width="5" fill="none" clip-path="url(#symbol)" />
+{% endmacro %}
+
+{% macro massnahme_unterkunft(color='#000000') %}
+<path d="M32,182 l0,-100 M224,182 l0,-100 M32,152 l192,0 M32,152 a96 48 0 0 1 192,0" stroke="{{color}}" stroke-width="5" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_patientenablage(color='#000000') %}
+<path d="M64,128 l128,0 M128,64 l0,128 M96,96 l64,0" stroke-width="5" stroke="{{color}}" fill="none" />
+<path d="M96,96 l0,-10 l-10,10 l10,10 Z" />
+<path d="M160,96 l0,-10 l10,10 l-10,10 Z" />
+{% endmacro %}
+
+{% macro massnahme_arztbesetzt(color='#000000') %}
+<path d="M112,160 l32,0" stroke-width="5" stroke="{{color}}" fill="none" />
+{% endmacro %}
+
+{% macro massnahme_sammelplatz_betroffene(color='#000000') %}
+<path d="M128,64 l0,96 M96,96 l64,0 M64,192 l64,-32 l64,32" stroke-width="5" stroke="{{color}}" fill="none" />
+<path d="M96,96 l0,-10 l-10,10 l10,10 Z" />
+<path d="M160,96 l0,-10 l10,10 l-10,10 Z" />
 {% endmacro %}
 
 {% macro platz() %}

@@ -1,5 +1,7 @@
 {% extends 'templates/einrichtung.j2' %}
 {%- import 'templates/macros/einrichtung.j2' as einrichtung -%}
+{%- import 'templates/macros/einheit.j2' as einheit -%}
 {% block svg %}
-	{{einrichtung.massnahme_sammelplatz_betroffene()}}
+	{{einrichtung.thw()}}
+	{{einheit.text('LV')}}
 {% endblock %}
